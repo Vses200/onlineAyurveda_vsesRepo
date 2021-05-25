@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -24,7 +25,9 @@ public class Order {
 	@Column
 	@Temporal(TemporalType.DATE)
 	private LocalDate orderDate;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Order_Medicine", joinColumns = @JoinColumn(name = "OrderId"),
+inverseJoinColumns = @JoinColumn(name = "MedicineId"))
 	private List<Medicine> medicineList;
 	@Column
 	private LocalDate dispatchDate;
