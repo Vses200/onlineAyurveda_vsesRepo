@@ -1,0 +1,143 @@
+package com.g7.oam.entities;
+
+import java.time.LocalDate;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+public class Medicine {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private String medicineId;
+	@Column
+	private String medicineName;
+	@Column
+	private float medicineCost;
+	@Column
+	@Temporal(TemporalType.DATE)
+	private LocalDate mfd;
+	@Column
+	@Temporal(TemporalType.DATE)
+	private LocalDate expiryDate;
+	@Column
+	private Company company;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "categoryId", referencedColumnName = "medicineId")
+	private Category category;
+
+	public Medicine() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Medicine(String medicineId, String medicineName, float medicineCost, LocalDate mfd, LocalDate expiryDate,
+			Company company, Category category) {
+		super();
+		this.medicineId = medicineId;
+		this.medicineName = medicineName;
+		this.medicineCost = medicineCost;
+		this.mfd = mfd;
+		this.expiryDate = expiryDate;
+		this.company = company;
+		this.category = category;
+	}
+
+	public String getMedicineId() {
+		return medicineId;
+	}
+
+	public void setMedicineId(String medicineId) {
+		this.medicineId = medicineId;
+	}
+
+	public String getMedicineName() {
+		return medicineName;
+	}
+
+	public void setMedicineName(String medicineName) {
+		this.medicineName = medicineName;
+	}
+
+	public float getMedicineCost() {
+		return medicineCost;
+	}
+
+	public void setMedicineCost(float medicineCost) {
+		this.medicineCost = medicineCost;
+	}
+
+	public LocalDate getMfd() {
+		return mfd;
+	}
+
+	public void setMfd(LocalDate mfd) {
+		this.mfd = mfd;
+	}
+
+	public LocalDate getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(LocalDate expiryDate) {
+		this.expiryDate = expiryDate;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((medicineId == null) ? 0 : medicineId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Medicine other = (Medicine) obj;
+		if (medicineId == null) {
+			if (other.medicineId != null)
+				return false;
+		} else if (!medicineId.equals(other.medicineId))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Medicine [medicineId=" + medicineId + ", medicineName=" + medicineName + ", medicineCost="
+				+ medicineCost + ", mfd=" + mfd + ", expiryDate=" + expiryDate + ", company=" + company + ", category="
+				+ category + "]";
+	}
+
+}
