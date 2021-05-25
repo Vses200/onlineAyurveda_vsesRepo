@@ -1,1 +1,1 @@
-This is my repo for ayurveda app project ja5 group 7 -Vishesh Baral
+This is my repository for ayurveda app project ja5 group 7 -Vishesh Baral
