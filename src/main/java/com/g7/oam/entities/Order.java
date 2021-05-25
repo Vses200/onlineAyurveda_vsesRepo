@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,30 +15,29 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Customer_Order")
 public class Order {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int orderId;
 	@Column
-	@Temporal(TemporalType.DATE)
 	private LocalDate orderDate;
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "Order_Medicine", joinColumns = @JoinColumn(name = "OrderId"),
-inverseJoinColumns = @JoinColumn(name = "MedicineId"))
+	@JoinTable(name = "Order_Medicine", joinColumns = @JoinColumn(name = "orderId"), inverseJoinColumns = @JoinColumn(name = "medicineId"))
 	private List<Medicine> medicineList;
 	@Column
 	private LocalDate dispatchDate;
 	@Column
 	private float totalCost;
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "userId", referencedColumnName = "orderId")
+	@JoinColumn(name = "user_ID", referencedColumnName = "userId")
 	private Customer customer;
 	@Column
+	@Enumerated(EnumType.STRING)
 	private OrderStatus status;
 
 	public Order() {

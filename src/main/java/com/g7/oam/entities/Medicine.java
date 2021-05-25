@@ -5,13 +5,13 @@ import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class Medicine {
@@ -24,15 +24,14 @@ public class Medicine {
 	@Column
 	private float medicineCost;
 	@Column
-	@Temporal(TemporalType.DATE)
 	private LocalDate mfd;
 	@Column
-	@Temporal(TemporalType.DATE)
 	private LocalDate expiryDate;
 	@Column
+	@Enumerated(EnumType.STRING)
 	private Company company;
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "categoryId", referencedColumnName = "medicineId")
+	@JoinColumn(name = "category_ID", referencedColumnName = "categoryId")
 	private Category category;
 
 	public Medicine() {

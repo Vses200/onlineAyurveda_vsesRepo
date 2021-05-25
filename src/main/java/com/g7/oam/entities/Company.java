@@ -10,5 +10,5 @@ public enum Company {
 	Company(String name) {
 		this.name = name;
 	}
-	
+
 }
